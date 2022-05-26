@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/styles/main.css">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo2.png" style="width: 100px">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/' ? 'active' : '' %>" aria-current="page" href="/">產品購買</a>
+          </li>
+          <% if (isLogin) { %>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/cart' ? 'active' : '' %>" aria-current="page" href="/cart">查看購物車</a>
+            </li>
+          <% } %>
+          <% if (!isLogin) { %>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/login' ? 'active' : '' %>" aria-current="page" href="/login">會員登入</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" aria-current="page" href="/signup">註冊會員</a>
+            </li>
+          <% } %>
+        </ul>
+        <% if (isLogin) { %>
+          <form class="d-flex" action="/logout" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn btn-outline-primary">登出</button>
+          </form>
+        <% } %>
+      </div>
+    </div>
+  </nav>

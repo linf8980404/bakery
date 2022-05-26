@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/styles/main.css">
+<%- include('./includes/header') %>
+</head>
+<body>
+    <%- include('./includes/navbar') %>
+
+<div class="container-fluid">
+    <div class="row">
+    <div class="col col-12 col-sm-12 col-md-12 col-lg-12 position-center">
+        <figure class="figure">
+        <img
+            src="../images/banner.jpg"
+            class="figure-img img-fluid rounded"
+            alt="background"
+            />
+        <figcaption class="figure-caption text-end">
+            
+        </figcaption>
+        </figure>
+    </div>
+    </div>
+</div>
+
+    <div class="container">
+        <h3 class="pageTitle"><%= pageTitle %></h3>
+        <div class="row col-md-10 col-sm-12 offset-md-2">
+            <% if (products.length > 0) { %>
+                <% products.forEach((product) => { %>
+                    <div class=" g-3 card justify-content-center border-light box" style="width: 16rem;" >
+                        <div class="card border-light h-100">    
+                            <img src="<%= product.imageUrl %>" class="card-img-top border-light " alt="<%= product.title %>">
+                            <div class="card-body">
+                            <h5 class="card-title"><%= product.title %></h5>
+                            <p id="description" class="card-text box-hover-text box-body text-center lh-lg fw-bold"><%= product.description %></p>
+                            </div>
+                        </div>
+                        
+                        <div class="container-fluid">
+                            <div class="row justify-content-center" >
+                                <% if (isLogin) { %>
+                                <form id="nameform" action="/cart-add-item" method="POST">
+                                    <input type="hidden" name="productId" value="<%= product.id %>">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    
+                                    &emsp;&emsp;<button type="submit" class="btn btn-primary">加到購物車</button>
+                                </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <% }) %>
+            <% } else { %>
+                <h1>尚無商品</h1>
+            <% } %>
+        </div>
+    </div>
+
+    <%- include('./includes/footer') %>

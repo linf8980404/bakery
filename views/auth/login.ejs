@@ -1,0 +1,38 @@
+<%- include('../includes/header') %>
+</head>
+<body>
+    <%- include('../includes/navbar') %>
+    <div class="container-md mt-3">
+        <div class="row justify-content-center">
+            <div class="col-8 text-center">
+                <h2>會員登入</h2>
+            </div>
+            <% if (errorMessage) { %>
+              <div class="col-8">
+                <div class="alert alert-danger" role="alert">
+                  <%= errorMessage %>
+                </div>
+              </div>
+            <% } %>
+            <div class="col-8">
+                <form class="row g-3 needs-validation" action="/login" method="POST">
+                    <div>
+                      <label for="email" class="form-label">會員信箱</label>
+                      <input type="email" class="form-control" id="email" name="email" value="admin@google.com">
+                    </div>
+
+                    <div>
+                      <label for="password" class="form-label">密碼</label>
+                      <input type="password" class="form-control" id="password" name="password" value="11111111">
+                    </div>
+
+                    <div>
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      <button class="btn btn-primary" type="submit">登入</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../includes/footer') %>
